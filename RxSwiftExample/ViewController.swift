@@ -30,9 +30,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let searchableText = searchBar
                             .rx
                             .text
+                            .throttle(0.3, scheduler: MainScheduler.instance)
         
-        searchableText.subscribe(onNext: { n in
-            print("\(n)")
+        
+        searchableText
+                .subscribe(onNext: { n in
+           if let n = n {
+               self.showCities = self.allCities.filter({$0.hasPrefix(n)})
+               self.tableView.reloadData()
+           }
         }).addDisposableTo(disposeBag)
         
         
