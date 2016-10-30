@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -16,11 +18,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var showCities = [String]()
     let allCities = ["New York", "London", "Oslo", "Warsaw", "Berlin", "Praga", "Madrid", "Barcelona", "Santiago" ]
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         self.tableView.delegate = self
+        
+        
+        
+        let searchableText = searchBar
+                            .rx
+                            .text
+        
+        searchableText.subscribe(onNext: { n in
+            print("\(n)")
+        }).addDisposableTo(disposeBag)
+        
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
