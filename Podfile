@@ -6,12 +6,14 @@ target 'RxSwiftExample' do
   use_frameworks!
 
   # Pods for RxSwiftExample
-  pod "RxSwift"
-  pod "RxCocoa"
+  pod 'RxSwift',    '~> 3.0'
+  pod 'RxCocoa',    '~> 3.0'
 
   target 'RxSwiftExampleTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'RxBlocking', '~> 3.0'
+    pod 'RxTest',     '~> 3.0'
   end
 
 end
