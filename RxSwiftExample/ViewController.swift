@@ -39,7 +39,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                self.showCities = self.allCities.filter({$0.hasPrefix(n)})
                self.tableView.reloadData()
            }
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
         
         
     }
